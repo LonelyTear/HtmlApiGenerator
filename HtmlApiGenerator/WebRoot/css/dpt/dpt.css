@@ -1,0 +1,72 @@
+
+.quanguo{
+	background-image:url(全国.jpg);
+	background-position:top;	
+	background-attachment:fixed;
+}
+.anhui{
+	background-image:url(安徽.jpg);
+	background-position:top;	
+}
+.beijing{
+	background-image:url(北京.jpg);
+	background-position:top;	
+}
+.dalian{
+	background-image:url(大连.jpg);
+	background-position:top;	
+}
+.guangdong{
+	background-image:url(广东.jpg);
+	background-position:top;
+}
+.henan{
+	background-image:url(河南.jpg);
+	background-position:top;	
+}
+.hubei{
+	background-image:url(湖北.jpg);
+	background-position:top;
+}
+.jiangsu{
+	background-image:url(江苏.jpg);
+	background-position:top;
+}
+.liaoning{
+	background-image:url(辽宁.jpg);
+	background-position:top;
+}
+.ningbo{
+	background-image:url(宁波.jpg);
+	background-position:top;
+}
+.qingdao{
+	background-image:url(青岛.jpg);
+	background-position:top;
+}
+.shandong{
+	background-image:url(山东.jpg);
+	background-position:top;
+}
+.shanghai{
+	background-image:url(上海.jpg);
+	background-position:top;
+}
+.shenzhen{
+	background-image:url(深圳.jpg);
+	background-position:top;
+}
+.sichuan{
+	background-image:url(四川.jpg);
+	background-position:top;
+}
+.suzhou{
+	background-image:url(苏州.jpg);
+	background-position:top;
+}
+.zhejiang{
+	background-image:url(浙江.jpg);
+	background-position:top;
+}
+
+/* 产品   */

@@ -1,0 +1,37 @@
+.field {
+	width: 800px;
+	height: 15px;
+	padding: 1 1 1 1;
+	margin: 0 0 0 0;
+	background-color: #FDFAC2;
+	text-align: left;
+	float: left;
+	/*  »√div ‘≤Ω« */
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.tips {
+	width: 300px;
+	height: 15px;
+	padding: 1 1 1 1;
+	margin: 0 0 0 0;
+	background-image:url(grass.gif);
+	text-align: center;
+	display: none;
+	float: left;
+	/*  »√div ‘≤Ω« */
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.none {
+	width: 800px;
+	height: 15px;
+	padding: 1 1 1 1;
+	margin: 0 0 0 0;
+	text-align:left;
+	float: left;
+}

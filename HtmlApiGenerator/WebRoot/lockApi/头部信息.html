@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel='stylesheet' type='text/css' href='../css/dpt/dpt.css' />
+		<link rel='stylesheet' type='text/css' href='../css/other/other.css' />
+		<script src='../js/jquery-1.4.2.min.js'></script>
+		<script src='../js/other.js'></script>
+		<title>接口头部定义</title>
+	</head>
+<body align='left'  bgcolor="#DDDDDD">
+		<div
+			style='margin-left:auto; margin-right:auto;width:481px;height:94px'>	<h1>接口头部定义	</h1>        </div>
+        <hr/>   
+        <h2>接口列表	</h2> 
+<table border="1">
+		  <tr>
+		    <td>环节</td>
+		    <td>接口名称</td>
+		    <td>代码</td>
+		    <td>功能描述</td>
+  </tr>
+		  <tr>
+		    <td rowspan="4">车险承保环节</td>
+		    <td>交强险保费计算</td>
+		    <td>0330-02</td>
+		    <td>外围系统将投保车辆信息情况送核心，核心根据车辆信息计算保费返回外围系统。</td>
+  </tr>
+		  <tr>
+		    <td>商业险投保查询</td>
+		    <td>0339-01</td>
+		    <td>外围系统将投保车辆信息情况送核心，核心根据车辆信息上传车险平台进行投标查询。</td>
+  </tr>
+		  <tr>
+		    <td>交强险投保查询校验</td>
+		    <td>0330-06</td>
+		    <td>外围系统将问题答案给核心，核心根据车辆信息计算保费返回外围系统。</td>
+  </tr>
+		  <tr>
+		    <td>商业险投保查询校验</td>
+		    <td>0339-06</td>
+		    <td>外围系统将问题答案给核心，核心根据车辆信息上传车险平台进行投标查询校验。</td>
+  </tr>
+		  <tr>
+		    <td rowspan="2">车险其它接口</td>
+		    <td>新车报备（北京）</td>
+		    <td>0300-51</td>
+		    <td>外围系统收集新车数据，反馈至核心，核心再向车险平台报备</td>
+  </tr>
+		  <tr>
+		    <td>查询平台返回信息</td>
+		    <td>0401-01</td>
+		    <td>外围系统将车辆查询码送核心，核心根据车辆查询码从库中找到相应的平台返回报文给外围系统。</td>
+  </tr>
+</table>
+
+
+
+
+
+<hr/>
+             <h2>报文格式</h2>
+            <h4>数据文件采用标准的XML格式，字符编码为GBK；标准报文的根是PACKET，并由报文头（HEAD）和报文体（BODY）两部分组成，如下：</h4>
+<table border="1">
+  <tr>
+    <td>报文块</td>
+    <td>描述</td>
+  </tr>
+  <tr>
+    <td>声明部分</td>
+    <td>encoding="GBK?#为格式声明；</td>
+  </tr>
+  <tr>
+    <td>报文根</td>
+    <td>以@PACKET#为起始标记，以@/PACKET#为结束标记。</td>
+  </tr>
+  <tr>
+    <td>报文头</td>
+    <td>以@HEAD#为起始标记，以@/HEAD#为结束标记。</td>
+  </tr>
+  <tr>
+    <td>报文体</td>
+    <td>以@BODY#为起始标记，以@/BODY#为结束标记。</td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+<hr/>
+<h2>请求报文</h2>
+            <h4>请求报文的报文头部分是固定的，格式如下：</h4>
+<table border="1">
+  <tr>
+    <td>No.</td>
+    <td>字段名</td>
+    <td>类型</td>
+    <td>大小</td>
+    <td>必传</td>
+    <td>说明</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>REQUEST_TYPE</td>
+    <td>V</td>
+    <td>8</td>
+    <td>Y</td>
+    <td>请求的接口类型代码；参见代码</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>SYSNAME</td>
+    <td>V</td>
+    <td>30</td>
+    <td>Y</td>
+    <td>外围系统名称</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>SYSCODE</td>
+    <td>V</td>
+    <td>30</td>
+    <td>Y</td>
+    <td>外围系统代码参见代码</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>USERCDE</td>
+    <td>V</td>
+    <td>11</td>
+    <td>N</td>
+    <td>操作用户代码</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>DPTCDE</td>
+    <td>V</td>
+    <td>11</td>
+    <td>N</td>
+    <td>分机构代码</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>TYPE</td>
+    <td>C</td>
+    <td>1</td>
+    <td>N</td>
+    <td>操作类型（保费计算、申请核保必传）参见代码</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>DATA</td>
+    <td>C</td>
+    <td>1</td>
+    <td>N</td>
+    <td>数据类型（保费计算、申请核保必传）参见代码</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>SERVICE_NO</td>
+    <td>V</td>
+    <td>20</td>
+    <td>Y</td>
+    <td>中间业务平台要求增加(具体内容由中间业务平台确定)</td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>SERVICENAME</td>
+    <td>V</td>
+    <td>200</td>
+    <td>Y</td>
+    <td>中间业务平台要求增加(具体内容由中间业务平台确定)</td>
+  </tr>
+</table>
+<h4>而报文的报文体部分因具体的接口类型不同，而不同。请求报文的报文格式范例：</h4>
+<div id ="c" align="left">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?xmlversion=&quot;1.0&quot;encoding=&quot;GBK&quot;?&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;PACKETtype=&quot;REQUEST&quot;version=&quot;1.0&quot;&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;HEAD&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;REQUEST_TYPE&gt;0330-02&lt;/REQUEST_TYPE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SYSNAME&gt;电销&lt;/SYSNAME&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SYSCODE&gt;01&lt;/SYSCODE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;USERCDE&gt;100009999&lt;/USERCDE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;DPTCDE&gt;33&lt;/DPTCDE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;TYPE&gt;I&lt;/ TYPE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;DATA&gt;A&lt;/DATA&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/HEAD&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;BODY&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;……<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/BODY&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/PACKET&gt;<br/>
+
+
+</div>
+
+
+
+
+
+
+<hr/>
+<h2>返回报文</h2>
+<h4>返回报文按照平台处理结果，分为成功时的返回报文和失败时的报文。它们的报文头的格式相同，不同的是具体的值。另外，失败的时候，是没有报文体的。
+报文头块的格式如下：</h4>
+<table border="1">
+  <tr>
+    <td>No.</td>
+    <td>字段名</td>
+    <td>类型</td>
+    <td>大小</td>
+    <td>必传</td>
+    <td>说明</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>REQUEST_TYPE</td>
+    <td>字符</td>
+    <td>8</td>
+    <td>Y</td>
+    <td>请求的接口类型代码；参见代码</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>RESPONSE_CODE</td>
+    <td>布尔</td>
+    <td>1</td>
+    <td>Y</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>ERROR_CODE</td>
+    <td>枚举</td>
+    <td>5</td>
+    <td>Y</td>
+    <td>错误代码；参见代码</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>ERROR_DESC</td>
+    <td>字符</td>
+    <td>600</td>
+    <td>Y</td>
+    <td>错误说明；</td>
+  </tr>
+</table>
+<h4>返回成功时的报文格式范例：</h4>
+<div align="left">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?xml version=&quot;1.0&quot; encoding=&quot;GBK&quot;?&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;PACKET type=&quot;RESPONSE&quot; version=&quot;1.0&quot;&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;HEAD&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;REQUEST_TYPE&gt;0330-02&lt;/REQUEST_TYPE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;RESPONSE_CODE&gt;1&lt;/RESPONSE_CODE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ERROR_CODE&gt;0000&lt;/ERROR_CODE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ERROR_MESSAGE&gt;成功&lt;/ERROR_MESSAGE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/HEAD&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;BODY&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;……<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/BODY&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/PACKET&gt;<br/>
+
+</div>
+<h4>返回失败时的报文格式范例：</h4>
+<div align="left">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?xml version=&quot;1.0&quot; encoding=&quot;GBK&quot;?&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;PACKET type=&quot;RESPONSE&quot; version=&quot;1.0&quot;&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;HEAD&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;REQUEST_TYPE&gt;0330-02&lt;/REQUEST_TYPE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;RESPONSE_CODE&gt;0&lt;/RESPONSE_CODE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ERROR_CODE&gt;0001&lt;/ERROR_CODE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ERROR_MESSAGE&gt;计算失败&lt;/ERROR_MESSAGE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/HEAD&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/PACKET&gt;<br/>
+
+</div>
+</body>
+
+<script>
+$(document).ready(function(){
+var b ="&lt;?xmlversion=&quot;1.0&quot;encoding=&quot;GBK&quot;?&gt;"+
+"&lt;PACKETtype=&quot;REQUEST&quot;version=&quot;1.0&quot;&gt;"+
+"&lt;HEAD&gt;"+
+"&lt;REQUEST_TYPE&gt;0330-02&lt;/REQUEST_TYPE&gt;"+
+"&lt;SYSNAME&gt;电销&lt;/SYSNAME&gt;"+
+"&lt;SYSCODE&gt;01&lt;/SYSCODE&gt;"+
+"&lt;USERCDE&gt;100009999&lt;/USERCDE&gt;"+
+"&lt;DPTCDE&gt;33&lt;/DPTCDE&gt;"+
+"&lt;TYPE&gt;I&lt;/"+
+"TYPE&gt;"+
+"&lt;DATA&gt;A&lt;/DATA&gt;"+
+"&lt;/HEAD&gt;"+
+"&lt;BODY&gt;"+
+"……"+
+"&lt;/BODY&gt;"+
+"&lt;/PACKET&gt;";
+
+
+	
+	
+$("#b").text(c);
+
+}
+ 
+);
+
+
+</script>
+</html>

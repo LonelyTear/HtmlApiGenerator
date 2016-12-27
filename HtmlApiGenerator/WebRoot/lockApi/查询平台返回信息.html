@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel='stylesheet' type='text/css' href='../css/dpt/dpt.css' />
+		<link rel='stylesheet' type='text/css' href='../css/other/other.css' />
+		<script src='../js/jquery-1.4.2.min.js'></script>
+		<script src='../js/other.js'></script>
+		<title>查询平台返回信息</title>
+	</head>
+<body align='left'  bgcolor="#DDDDDD">
+		<div
+			style='margin-left:auto; margin-right:auto;width:481px;height:94px'>	<h1>查询平台返回信息	</h1>        </div>
+        <hr/>   
+<h2>接口说明</h2>
+        <p>请求类型为0401-01，外围系统将车辆查询码送核心，核心根据车辆查询码从库中找到相应的平台返回标准报文给外围系统。虽然请求时仍必须带有HEAD节点，但是一旦请求到达本接口，将只关注BASE中的QUERY_SEQUENCE_NO。</p>
+<hr/>
+<h2>请求数据</h2>
+<p>代码：BASE。<br>
+               说明：只需要</p>
+<table border="1">
+  <tr>
+    <td>No.</td>
+    <td>字段名</td>
+    <td>类型</td>
+    <td>大小</td>
+    <td>必传</td>
+    <td>说明</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>REQUEST_TYPE</td>
+    <td>V</td>
+    <td>8</td>
+    <td>Y</td>
+    <td>请求的接口类型代码；参见代码</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>SYSNAME</td>
+    <td>V</td>
+    <td>30</td>
+    <td>Y</td>
+    <td>外围系统名称</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>SYSCODE</td>
+    <td>V</td>
+    <td>30</td>
+    <td>Y</td>
+    <td>外围系统代码参见代码</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>USERCDE</td>
+    <td>V</td>
+    <td>11</td>
+    <td>N</td>
+    <td>操作用户代码</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>DPTCDE</td>
+    <td>V</td>
+    <td>11</td>
+    <td>N</td>
+    <td>分机构代码</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>TYPE</td>
+    <td>C</td>
+    <td>1</td>
+    <td>N</td>
+    <td>操作类型（保费计算、申请核保必传）参见代码</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>DATA</td>
+    <td>C</td>
+    <td>1</td>
+    <td>N</td>
+    <td>数据类型（保费计算、申请核保必传）参见代码</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>SERVICE_NO</td>
+    <td>V</td>
+    <td>20</td>
+    <td>Y</td>
+    <td>中间业务平台要求增加(具体内容由中间业务平台确定)</td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>SERVICENAME</td>
+    <td>V</td>
+    <td>200</td>
+    <td>Y</td>
+    <td>中间业务平台要求增加(具体内容由中间业务平台确定)</td>
+  </tr>
+</table>
+<h4>而报文的报文体部分因具体的接口类型不同，而不同。请求报文的报文格式范例：</h4>
+<div id ="c" align="left">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?xmlversion=&quot;1.0&quot;encoding=&quot;GBK&quot;?&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;PACKETtype=&quot;REQUEST&quot;version=&quot;1.0&quot;&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;HEAD&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;REQUEST_TYPE&gt;0330-02&lt;/REQUEST_TYPE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SYSNAME&gt;电销&lt;/SYSNAME&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SYSCODE&gt;01&lt;/SYSCODE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;USERCDE&gt;100009999&lt;/USERCDE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;DPTCDE&gt;33&lt;/DPTCDE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;TYPE&gt;I&lt;/ TYPE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;DATA&gt;A&lt;/DATA&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/HEAD&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;BODY&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;……<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/BODY&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/PACKET&gt;<br/>
+
+
+</div>
+
+
+
+
+
+
+<hr/>
+<h2>返回数据</h2>
+<h4>返回报文按照平台处理结果，分为成功时的返回报文和失败时的报文。它们的报文头的格式相同，不同的是具体的值。另外，失败的时候，是没有报文体的。
+报文头块的格式如下：</h4>
+
+<table border="1">
+  <tr>
+    <td>No.</td>
+    <td>字段名</td>
+    <td>类型</td>
+    <td>大小</td>
+    <td>必传</td>
+    <td>说明</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>REQUEST_TYPE</td>
+    <td>V</td>
+    <td>8</td>
+    <td>Y</td>
+    <td>请求的接口类型代码；参见代码</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>SYSNAME</td>
+    <td>V</td>
+    <td>30</td>
+    <td>Y</td>
+    <td>外围系统名称</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>SYSCODE</td>
+    <td>V</td>
+    <td>30</td>
+    <td>Y</td>
+    <td>外围系统代码参见代码</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>USERCDE</td>
+    <td>V</td>
+    <td>11</td>
+    <td>N</td>
+    <td>操作用户代码</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>DPTCDE</td>
+    <td>V</td>
+    <td>11</td>
+    <td>N</td>
+    <td>分机构代码</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>TYPE</td>
+    <td>C</td>
+    <td>1</td>
+    <td>N</td>
+    <td>操作类型（保费计算、申请核保必传）参见代码</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>DATA</td>
+    <td>C</td>
+    <td>1</td>
+    <td>N</td>
+    <td>数据类型（保费计算、申请核保必传）参见代码</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>SERVICE_NO</td>
+    <td>V</td>
+    <td>20</td>
+    <td>Y</td>
+    <td>中间业务平台要求增加(具体内容由中间业务平台确定)</td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>SERVICENAME</td>
+    <td>V</td>
+    <td>200</td>
+    <td>Y</td>
+    <td>中间业务平台要求增加(具体内容由中间业务平台确定)</td>
+  </tr>
+</table>
+<h4>返回成功时的报文格式范例：</h4>
+<div align="left">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?xml version=&quot;1.0&quot; encoding=&quot;GBK&quot;?&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;PACKET type=&quot;RESPONSE&quot; version=&quot;1.0&quot;&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;HEAD&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;REQUEST_TYPE&gt;0330-02&lt;/REQUEST_TYPE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;RESPONSE_CODE&gt;1&lt;/RESPONSE_CODE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ERROR_CODE&gt;0000&lt;/ERROR_CODE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ERROR_MESSAGE&gt;成功&lt;/ERROR_MESSAGE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/HEAD&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;BODY&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;……<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/BODY&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/PACKET&gt;<br/>
+
+</div>
+<h4>返回失败时的报文格式范例：</h4>
+<div align="left">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?xml version=&quot;1.0&quot; encoding=&quot;GBK&quot;?&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;PACKET type=&quot;RESPONSE&quot; version=&quot;1.0&quot;&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;HEAD&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;REQUEST_TYPE&gt;0330-02&lt;/REQUEST_TYPE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;RESPONSE_CODE&gt;0&lt;/RESPONSE_CODE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ERROR_CODE&gt;0001&lt;/ERROR_CODE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ERROR_MESSAGE&gt;计算失败&lt;/ERROR_MESSAGE&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/HEAD&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/PACKET&gt;<br/>
+
+</div>
+
+
+</body>
+
+<script>
+$(document).ready(function(){
+var b ="&lt;?xmlversion=&quot;1.0&quot;encoding=&quot;GBK&quot;?&gt;"+
+"&lt;PACKETtype=&quot;REQUEST&quot;version=&quot;1.0&quot;&gt;"+
+"&lt;HEAD&gt;"+
+"&lt;REQUEST_TYPE&gt;0330-02&lt;/REQUEST_TYPE&gt;"+
+"&lt;SYSNAME&gt;电销&lt;/SYSNAME&gt;"+
+"&lt;SYSCODE&gt;01&lt;/SYSCODE&gt;"+
+"&lt;USERCDE&gt;100009999&lt;/USERCDE&gt;"+
+"&lt;DPTCDE&gt;33&lt;/DPTCDE&gt;"+
+"&lt;TYPE&gt;I&lt;/"+
+"TYPE&gt;"+
+"&lt;DATA&gt;A&lt;/DATA&gt;"+
+"&lt;/HEAD&gt;"+
+"&lt;BODY&gt;"+
+"……"+
+"&lt;/BODY&gt;"+
+"&lt;/PACKET&gt;";
+
+
+	
+	
+$("#b").text(c);
+
+}
+ 
+);
+
+
+</script>
+</html>
